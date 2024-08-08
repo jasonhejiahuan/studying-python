@@ -2,6 +2,8 @@ import requests
 import os
 import hashlib
 import shutil
+import random
+import string
 
 def calculate_self_hash():
     # 获取当前脚本的文件名
@@ -16,6 +18,10 @@ def calculate_self_hash():
 
     return md5_hash
 
+def generate_random_prefix(length=8):
+    letters = string.ascii_letters + string.digits
+    return ''.join(random.choice(letters) for i in range(length))
+
 def update_self():
     # 获取当前脚本的文件名
     script_filename = os.path.abspath(__file__)
@@ -25,8 +31,11 @@ def update_self():
     if not os.path.exists(backup_folder):
         os.makedirs(backup_folder)
 
+    # 生成随机前缀
+    random_prefix = generate_random_prefix()
+
     # 创建备份文件名
-    backup_filename = os.path.join(backup_folder, os.path.basename(script_filename))
+    backup_filename = os.path.join(backup_folder, f"{random_prefix}_{os.path.basename(script_filename)}")
 
     # 备份当前脚本
     shutil.copy(script_filename, backup_filename)
@@ -41,7 +50,7 @@ def update_self():
     hash_url = "https://raw.githubusercontent.com/jasonhejiahuan/studying-python/main/image_download_test.py-md5.txt"
     hash_response = requests.get(hash_url)
     expected_hash = hash_response.text.strip()
-    print(f"线上版本的MD5哈希值为：", expected_hash)
+    print(f"线上版本的MD5哈希值为：{expected_hash}")
 
     # 检查当前脚本的MD5哈希值是否与预期值匹配
     if calculate_self_hash() != expected_hash:
