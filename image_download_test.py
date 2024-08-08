@@ -60,33 +60,38 @@ def update_self():
     else:
         print("\033[32m更新完成\033[0m")
 
-def ota():
-    print(f"这个程序的MD5哈希值为: {calculate_self_hash()}")
-    update_self()
 
-def download_image():
-    # 检查当前目录下是否存在saves文件夹，如果不存在则创建
-    if not os.path.exists('saves'):
-        os.makedirs('saves')
-    # 切换到saves文件夹
-    os.chdir('saves')
+print(f"这个程序的MD5哈希值为: {calculate_self_hash()}")
+update_self()
 
-    # 让用户输入
-    image_url = input("请输入图片的URL：")
-    name_prefix = input("请输入图片的前缀：")
+# 检查当前目录下是否存在saves文件夹，如果不存在则创建
+if not os.path.exists('saves'):
+    os.makedirs('saves')
+# 切换到saves文件夹
+os.chdir('saves')
+print("请在" + "saves" + "目录查看下载好的图片")
 
-    # 检查当前目录下是否存在name_prefix文件夹，如果不存在则创建
-    if not os.path.exists(name_prefix):
-        os.makedirs(name_prefix)
+# 让用户输入
+global_image_url = input("请输入图片的URL：")
+name_prefix = input("请输入图片的前缀：")
 
-    # 切换到name_prefix文件夹
-    os.chdir(name_prefix)
+# 检查当前目录下是否存在name_prefix文件夹，如果不存在则创建
+if not os.path.exists(name_prefix):
+    os.makedirs(name_prefix)
+
+# 切换到name_prefix文件夹
+os.chdir(name_prefix)
+
+
+#选项1:下载单张图片
+def download_single_image():
+
 
     # 定义图片名
-    file_name = image_url.split('/')[-1]
+    file_name = global_image_url.split('/')[-1]
     print("原始名称：" + file_name)
     # 发送GET请求获取图片数据
-    response = requests.get(image_url)
+    response = requests.get(global_image_url)
 
     # 保存图片到文件夹
     with open (name_prefix + file_name, 'wb') as f:
@@ -106,5 +111,45 @@ def download_image():
     print("图片格式为：" + file_name.split('.')[-1])
 
 if __name__ == "__main__":
-    ota()
-    download_image()
+    download_single_image()
+
+
+
+# 选项2:下载多张图片
+def download_multiple_images():
+    print("你输入的URL是" + global_image_url)
+    print("请确保你输入的URL不包括图片本身，而是图片前面的路径")
+    # 让用户输入图片名称范围
+    file_name_min = int(input("请输入图片名称NUMBER最小值："))
+    file_name_max = int(input("请输入图片名称NUMBER最大值："))
+    # 让用户输入图片格式
+    file_format = input("请输入图片格式，不包括点，比如png：")
+    for file_name in range(file_name_min, file_name_max + 1): #遍历所有可能要下载的图片名称NUMBER
+        image_url = global_image_url + str(file_name) + "." + file_format
+        print("正在下载图片" + str(file_name) + "." + file_format)
+        # 发送GET请求获取图片数据
+        response = requests.get(image_url)
+        # 保存图片到文件夹
+        with open (name_prefix + str(file_name) + "." + file_format, 'wb') as f:
+            f.write(response.content)
+    # 检测目录下是否有图片
+    print(os.listdir())
+    # 将输出内容存为列表
+    files = os.listdir()
+    # 输出图片下载成功
+    print("\033[32m图片下载成功\033[0m")
+    # 输出图片名
+    print("图片名为：" + str(file_name) + "." + file_format)
+    # 输出图片大小
+    print("图片大小为：" + str(len(response.content)) + "字节")
+    # 输出图片格式
+    print("图片格式为：" + file_format)
+    for file_name in files:
+        print("图片名为：" + file_name)
+        print("图片大小为：" + str(os.path.getsize(file_name)) + "字节")
+        print("图片格式为：" + file_name.split('.')[-1])
+    print("共下载了" + str(len(files)) + "张图片")
+
+
+
+download_multiple_images()
