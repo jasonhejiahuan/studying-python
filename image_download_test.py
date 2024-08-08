@@ -41,6 +41,7 @@ def update_self():
     hash_url = "https://raw.githubusercontent.com/jasonhejiahuan/studying-python/main/image_download_test.py-md5.txt"
     hash_response = requests.get(hash_url)
     expected_hash = hash_response.text.strip()
+    print(f"线上版本的MD5哈希值为：", expected_hash)
 
     # 检查当前脚本的MD5哈希值是否与预期值匹配
     if calculate_self_hash() != expected_hash:
