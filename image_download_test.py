@@ -49,6 +49,10 @@ def update_self():
     # 下载预期的MD5哈希值
     hash_url = "https://raw.githubusercontent.com/jasonhejiahuan/studying-python/main/image_download_test.py-md5.txt"
     hash_response = requests.get(hash_url)
+    if hash_response.status_code == 200:
+        print("成功获取线上版本的MD5哈希值")
+    else:
+        print("获取线上版本的MD5哈希值失败")
     expected_hash = hash_response.text.strip()
     print(f"线上版本的MD5哈希值为：{expected_hash}")
 
