@@ -52,7 +52,7 @@ def update_self():
     if hash_response.status_code == 200:
         print("成功获取线上版本的MD5哈希值")
     else:
-        print("获取线上版本的MD5哈希值失败")
+        print("\033[1;31m获取线上版本的MD5哈希值失败\033[0m")
     expected_hash = hash_response.text.strip()
     print(f"线上版本的MD5哈希值为：{expected_hash}")
 
@@ -62,7 +62,7 @@ def update_self():
         # 执行更新后的脚本文件
         os.system(f"python {script_filename}")
     else:
-        print("\033[32m更新完成\033[0m")
+        print("\033[1;42m现在是最新版本\033[0m")
 
 
 print(f"这个程序的MD5哈希值为: {calculate_self_hash()}")
