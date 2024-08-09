@@ -60,7 +60,7 @@ def update_self():
     if calculate_self_hash() != expected_hash:
         print("有新版本可用，正在更新脚本...")
         # 执行更新后的脚本文件
-        os.system(f"python {script_filename}")
+        os.system(f"python3 {script_filename}")
     else:
         print("\033[1;42m现在是最新版本\033[0m")
 
