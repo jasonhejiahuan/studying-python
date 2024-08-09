@@ -67,7 +67,7 @@ def update_self():
 
 print(f"这个程序的MD5哈希值为: {calculate_self_hash()}")
 update_self()
-print("如果能看到说明不需要重启软件就可应用更新！")
+
 # 检查当前目录下是否存在saves文件夹，如果不存在则创建
 if not os.path.exists('saves'):
     os.makedirs('saves')
