@@ -5,6 +5,8 @@ import shutil
 import random
 import string
 
+os.system("clear") #执行时清屏
+
 def calculate_self_hash():
     # 获取当前脚本的文件名
     script_filename = os.path.abspath(__file__)
