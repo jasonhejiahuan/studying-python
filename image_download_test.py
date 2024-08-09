@@ -155,6 +155,13 @@ def download_multiple_images():
         print("图片大小为：" + str(os.path.getsize(file_name)) + "字节")
         print("图片格式为：" + file_name.split('.')[-1])
     print("共下载了" + str(len(files)) + "张图片")
+    print("正在清除无效图片...")
+    #清除saves文件夹中文件太小的图片
+    if __name__ == "__main__":
+        for file_name in files:
+            if os.path.getsize(file_name) < 5000:
+                os.remove(file_name)
+                print("已删除无效图片：" + file_name)
 
 
 
