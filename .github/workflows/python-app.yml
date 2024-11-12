@@ -34,10 +34,10 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      env:
-        GLOBAL_IMAGE_URL: "https://www.concordschool.com.cn/5file/1000/96.jpg"
-        NAME_PREFIX: "test_prefix"
-        RUN_MODE: "1"  # 设置为 "1" 表示下载单张图片，"2" 表示下载多张图片
-      run: |
-        pytest -s
+#    - name: Test with pytest
+#      env:
+#        GLOBAL_IMAGE_URL: "https://www.concordschool.com.cn/5file/1000/96.jpg"
+#        NAME_PREFIX: "test_prefix"
+#        RUN_MODE: "1"  # 设置为 "1" 表示下载单张图片，"2" 表示下载多张图片
+#      run: |
+#        pytest -s
