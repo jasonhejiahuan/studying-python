@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 print("JASON Studio")
 print("made by Jason")
 
-dev_mode = True #设置这里，打开开发模式，避免自动覆盖开发版！！！！！！！
+dev_mode = False #设置这里，打开开发模式，避免自动覆盖开发版！！！！！！！
 
 
 
