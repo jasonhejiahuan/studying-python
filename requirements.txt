@@ -1,5 +1,4 @@
 requests
-shutil
 random
 string
 sys
