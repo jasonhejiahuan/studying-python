@@ -36,7 +36,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       env:
-            GLOBAL_IMAGE_URL: "https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/22f10850c5234b5285350743cfa16357"
+            GLOBAL_IMAGE_URL: "https://www.concordschool.com.cn/5file/1000/96.jpg"
             NAME_PREFIX: "test_prefix"
             RUN_MODE: "1"  # 设置为 "1" 表示下载单张图片，"2" 表示下载多张图片
       run: |
