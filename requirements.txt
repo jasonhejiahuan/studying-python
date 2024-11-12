@@ -1,5 +1,4 @@
 requests
-string
 sys
 matplotlib
 Pillow
