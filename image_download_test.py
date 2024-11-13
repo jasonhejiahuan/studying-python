@@ -59,11 +59,17 @@ else:
         shutil.copy(script_filename, backup_filename)
 
         url = "https://raw.githubusercontent.com/jasonhejiahuan/studying-python/main/image_download_test.py"
+        requests.head = {
+            'Cache-Control': "no-cache"
+        }
         response = requests.get(url)
         with open(script_filename, 'wb') as f:
             f.write(response.content)
 
         hash_url = "https://raw.githubusercontent.com/jasonhejiahuan/studying-python/main/image_download_test.py-md5.txt"
+        requests.head = {
+            'Cache-Control': "no-cache"
+        }
         hash_response = requests.get(hash_url)
         if hash_response.status_code == 200:
             print("成功获取线上版本的MD5哈希值")
