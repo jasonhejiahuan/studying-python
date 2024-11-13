@@ -127,6 +127,9 @@ print("请在" + "saves" + "目录查看下载好的图片")
 
 # 让用户输入
 if non_interactive_mode:
+    print(global_image_url)
+    print(name_prefix)
+    print(run_mode)
     print("已跳过用户输入global_image_url和name_prefix")
     pass
 else:
